@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  db_fr:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: fr
+      POSTGRES_PASSWORD: fr
+      POSTGRES_DB: fr
+  db_de:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: de
+      POSTGRES_PASSWORD: de
+      POSTGRES_DB: de
+  db_gb:
+    image: postgres
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: gb
+      POSTGRES_PASSWORD: gb
+      POSTGRES_DB: gb
