@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { getEntityManagerToken } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
-import { CarManufacturerDto } from './car-manufacturer.dto';
 import { CarManufacturer } from './car-manufacturer.entity';
 
 @Injectable()
@@ -14,23 +13,13 @@ export class CarManufacturersService {
       strict: false,
     });
   }
-
-  private toDto(entity: CarManufacturer): CarManufacturerDto {
-    return {
-      id: entity.id,
-      name: entity.name,
-    };
-  }
-
-  async findAll(countryCode: string): Promise<CarManufacturerDto[]> {
+  async findAll(countryCode: string): Promise<CarManufacturer[]> {
     const entityManager = await this.loadEntityManager(countryCode);
     if (!entityManager) {
       return [];
     }
 
-    return entityManager
-      .find(CarManufacturer)
-      .then((entities: CarManufacturer[]) => entities.map(this.toDto));
+    return entityManager.find(CarManufacturer);
   }
 
   async onApplicationBootstrap() {
